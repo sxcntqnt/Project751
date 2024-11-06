@@ -1,17 +1,25 @@
-name: Validate 'setup-go'
+name: Validate setuping up go
 
 on:
-  workflow_dispatch:
   push:
     branches:
+      - master
+      - staging
+      - develop
       - main
     paths-ignore:
       - '**.md'
   pull_request:
+    branches:
+      - master
+      - staging
+      - develop
+      - main
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
   schedule:
-    - cron: 0 0 * * *
+    - cron: '0 0 * * *'
 
 jobs:
   stable:
