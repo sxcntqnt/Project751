@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	
 )
 
 type GeocoderResponse struct {
@@ -44,7 +43,7 @@ type Geocoder struct {
 }
 
 func (geocoder *Geocoder) reverse(position Position) (GeocoderResponse, error) {
-        endpoint, _ := url.Parse("https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json")
+	endpoint, _ := url.Parse("https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json")
 	queryParams := endpoint.Query()
 	queryParams.Set("apiKey", geocoder.ApiKey)
 	queryParams.Set("mode", "retrieveAddresses")
@@ -57,7 +56,7 @@ func (geocoder *Geocoder) reverse(position Position) (GeocoderResponse, error) {
 		data, _ := ioutil.ReadAll(response.Body)
 		var geocoderResponse GeocoderResponse
 		json.Unmarshal(data, &geocoderResponse)
-		return geocoderResponse,nil
+		return geocoderResponse, nil
 	}
 
 }

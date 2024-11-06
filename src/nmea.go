@@ -10,14 +10,13 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	
 )
 
 type NMEA struct {
-	fixTimestamp      string
-	latitude          string
-	latitudeDirection string
-	longitude	string
+	fixTimestamp       string
+	latitude           string
+	latitudeDirection  string
+	longitude          string
 	longitudeDirection string
 	fixQuality         string
 	satellites         string
@@ -65,7 +64,7 @@ func main() {
 
 	options := serial.OpenOptions{
 		PortName:        "/dev/ttyACM0",
-		BaudRate:            9600,
+		BaudRate:        9600,
 		DataBits:        8,
 		StopBits:        1,
 		MinimumReadSize: 4,

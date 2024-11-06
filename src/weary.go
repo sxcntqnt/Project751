@@ -1,13 +1,14 @@
 package main
 
-import(
-	"fmt"
+import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 )
+
 type GeocoderResponse struct {
 	Response struct {
 		MetaInfo struct {
@@ -40,8 +41,9 @@ type Position struct {
 type Geocoder struct {
 	ApiKey string `json:"apiKey"`
 }
+
 func (geocoder *Geocoder) reverse(position Position) (GeocoderResponse, error) {
-        endpoint, _ := url.Parse("https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json")
+	endpoint, _ := url.Parse("https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json")
 	queryParams := endpoint.Query()
 	queryParams.Set("apiKey", geocoder.ApiKey)
 	queryParams.Set("mode", "retrieveAddresses")
@@ -54,11 +56,11 @@ func (geocoder *Geocoder) reverse(position Position) (GeocoderResponse, error) {
 		data, _ := ioutil.ReadAll(response.Body)
 		var geocoderResponse GeocoderResponse
 		json.Unmarshal(data, &geocoderResponse)
-		return geocoderResponse,nil
+		return geocoderResponse, nil
 	}
 
 }
-func WYA(){
+func WYA() {
 	latitude := flag.String("lat", "-1.28012", "Latitude")
 	longitude := flag.String("lng", "36.87314", "Longitude")
 	flag.Parse()
@@ -72,16 +74,16 @@ func WYA(){
 		data, _ := json.Marshal(result.Response.View[0].Result[0])
 		fmt.Println(string(data))
 	}
-	
+
 }
 
-func main(){
-   	var Kilemba string
+func main() {
+	var Kilemba string
 	fmt.Println("Enter Destination")
-	_,err:= fmt.Scan(&Kilemba)
-	if err == nil{
-	     fmt.Println("Your Destination is",Kilemba)
-    	}
-    WYA()
+	_, err := fmt.Scan(&Kilemba)
+	if err == nil {
+		fmt.Println("Your Destination is", Kilemba)
+	}
+	WYA()
 
 }
